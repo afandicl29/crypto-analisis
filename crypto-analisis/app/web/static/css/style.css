@@ -1,0 +1,456 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: #080c11;
+    color: #e6edf3;
+}
+
+.app {
+    max-width: 1450px;
+    margin: auto;
+    padding: 30px;
+}
+
+
+/* HEADER */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 30px;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    color: #7d8996;
+    margin-top: 6px;
+}
+
+.live-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: #8b949e;
+}
+
+.live-status span {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #3fb950;
+}
+
+
+/* TOOLBAR */
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    margin-bottom: 16px;
+}
+
+.symbol-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.symbol-selector label {
+    font-size: 11px;
+    color: #6e7681;
+    font-weight: 700;
+}
+
+select {
+    min-width: 180px;
+
+    padding: 11px 14px;
+
+    background: #111820;
+    border: 1px solid #283340;
+
+    border-radius: 7px;
+
+    color: #e6edf3;
+
+    font-size: 14px;
+}
+
+.last-update {
+    color: #6e7681;
+    font-size: 12px;
+}
+
+.last-update strong {
+    color: #aab4bf;
+}
+
+
+/* PANELS */
+
+.forecast-panel,
+.analysis-panel,
+.levels-panel {
+    background: #0e141b;
+
+    border: 1px solid #202a35;
+
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+}
+
+.panel-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 22px 24px;
+
+    border-bottom: 1px solid #202a35;
+}
+
+.panel-title h2 {
+    font-size: 18px;
+}
+
+.panel-title p {
+    color: #6e7681;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
+/* FORECAST TABLE */
+
+.forecast-table {
+    width: 100%;
+}
+
+.forecast-header,
+.forecast-data {
+    display: grid;
+
+    grid-template-columns:
+        1.4fr
+        1fr
+        1fr
+        1fr;
+}
+
+.forecast-header {
+    padding: 14px 20px;
+
+    color: #6e7681;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    border-bottom: 1px solid #202a35;
+}
+
+.forecast-data > div {
+    min-height: 190px;
+
+    padding: 25px 20px;
+
+    border-right: 1px solid #202a35;
+}
+
+.forecast-data > div:last-child {
+    border-right: none;
+}
+
+
+/* CURRENT PRICE */
+
+.current-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.asset-name {
+    color: #8b949e;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.current-price strong {
+    margin-top: 10px;
+
+    font-size: 32px;
+
+    letter-spacing: -1px;
+}
+
+.current-price small {
+    margin-top: 7px;
+
+    color: #6e7681;
+}
+
+
+/* FORECAST CELL */
+
+.forecast-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.forecast-cell .direction {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.forecast-cell .target {
+    margin-top: 9px;
+
+    font-size: 24px;
+}
+
+.forecast-cell .change {
+    margin-top: 5px;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.forecast-cell .confidence {
+    margin-top: 14px;
+
+    color: #6e7681;
+
+    font-size: 11px;
+}
+
+
+/* STATES */
+
+.forecast-cell.up {
+    background: rgba(46, 160, 67, 0.05);
+}
+
+.forecast-cell.up .direction,
+.forecast-cell.up .change {
+    color: #3fb950;
+}
+
+.forecast-cell.down {
+    background: rgba(248, 81, 73, 0.05);
+}
+
+.forecast-cell.down .direction,
+.forecast-cell.down .change {
+    color: #f85149;
+}
+
+.forecast-cell.neutral {
+    color: #8b949e;
+}
+
+
+/* AI ANALYSIS */
+
+.analysis-content {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
+
+    border-bottom: 1px solid #202a35;
+}
+
+.analysis-summary {
+    padding: 22px 24px;
+
+    border-right: 1px solid #202a35;
+}
+
+.analysis-summary:last-child {
+    border-right: none;
+}
+
+.analysis-summary span {
+    display: block;
+
+    color: #6e7681;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.analysis-summary strong {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 18px;
+}
+
+.analysis-status {
+    padding: 7px 10px;
+
+    border-radius: 5px;
+
+    background: #1b222c;
+
+    color: #8b949e;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.ai-message {
+    padding: 22px 24px;
+}
+
+.ai-message span {
+    color: #6e7681;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.ai-message p {
+    margin-top: 10px;
+
+    color: #aab4bf;
+
+    line-height: 1.7;
+}
+
+
+/* LEVELS */
+
+.levels-panel {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
+}
+
+.level {
+    padding: 22px;
+
+    border-right: 1px solid #202a35;
+}
+
+.level:last-child {
+    border-right: none;
+}
+
+.level span {
+    color: #6e7681;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.level strong {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 20px;
+}
+
+.level.current strong {
+    color: #e6edf3;
+}
+
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+
+    padding: 20px;
+
+    color: #4f5964;
+
+    font-size: 11px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .app {
+        padding: 15px;
+    }
+
+    .header {
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .toolbar {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .forecast-header,
+    .forecast-data {
+        grid-template-columns: 1fr;
+    }
+
+    .forecast-header {
+        display: none;
+    }
+
+    .forecast-data > div {
+        border-right: none;
+        border-bottom: 1px solid #202a35;
+    }
+
+    .forecast-data > div:last-child {
+        border-bottom: none;
+    }
+
+    .analysis-content,
+    .levels-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .analysis-summary,
+    .level {
+        border-right: none;
+        border-bottom: 1px solid #202a35;
+    }
+}

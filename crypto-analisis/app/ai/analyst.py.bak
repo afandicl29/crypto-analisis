@@ -1,0 +1,134 @@
+import json
+from typing import Any
+
+import requests
+
+from app.config.settings import (
+    AI_API_KEY,
+    AI_BASE_URL,
+    AI_MODEL,
+    AI_PROVIDER,
+    AI_TIMEOUT,
+)
+
+
+SYSTEM_PROMPT = """
+You are the AI Analyst for a cryptocurrency quantitative
+decision-support application.
+
+Analyze only the quantitative data provided.
+
+Do not invent market data.
+Do not change supplied numbers.
+Do not guarantee profit.
+Do not execute trades.
+
+The application evaluates 3-day, 5-day and 7-day horizons.
+
+Return JSON only:
+
+{
+  "summary": "",
+  "bullish_factors": [],
+  "risk_factors": [],
+  "outlook": {
+    "3d": "",
+    "5d": "",
+    "7d": ""
+  },
+  "model_assessment": "",
+  "conclusion": ""
+}
+
+Keep the analysis concise and objective.
+"""
+
+
+def analyze(
+    analysis: dict[str, Any],
+) -> dict[str, Any]:
+
+    if AI_PROVIDER != "openrouter":
+        raise RuntimeError(
+            f"Unsupported AI provider: {AI_PROVIDER}"
+        )
+
+    if not AI_API_KEY:
+        raise RuntimeError(
+            "AI_API_KEY is not configured."
+        )
+
+    payload = {
+        "symbol": analysis.get("symbol"),
+        "interval": analysis.get("interval"),
+        "current_price": analysis.get("current_price"),
+        "indicators": analysis.get("indicators", {}),
+        "risk": analysis.get("risk", {}),
+        "horizons": analysis.get("horizons", {}),
+        "model_quality": analysis.get(
+            "model_quality",
+            {},
+        ),
+        "signal": analysis.get(
+            "signal",
+            {},
+        ),
+    }
+
+    response = requests.post(
+        f"{AI_BASE_URL}/chat/completions",
+        headers={
+            "Authorization": f"Bearer {AI_API_KEY}",
+            "Content-Type": "application/json",
+            "HTTP-Referer": "http://localhost:8000",
+            "X-Title": "Crypto Analyzer",
+        },
+        json={
+            "model": AI_MODEL,
+            "temperature": 0.2,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": SYSTEM_PROMPT,
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        "Analyze this quantitative result:\n\n"
+                        + json.dumps(
+                            payload,
+                            indent=2,
+                        )
+                    ),
+                },
+            ],
+        },
+        timeout=AI_TIMEOUT,
+    )
+
+    if not response.ok:
+        raise RuntimeError(
+            f"OpenRouter API error "
+            f"{response.status_code}: "
+            f"{response.text[:500]}"
+        )
+
+    data = response.json()
+
+    content = (
+        data["choices"][0]["message"]["content"]
+        .strip()
+    )
+
+    if content.startswith("```"):
+        lines = content.splitlines()
+
+        if lines and lines[0].startswith("```"):
+            lines = lines[1:]
+
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+
+        content = "\n".join(lines).strip()
+
+    return json.loads(content)

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Crypto Analyzer</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="app">
+
+    <header class="header">
+        <div>
+            <h1>Crypto Analyzer</h1>
+            <p>AI Market Forecast · 3D / 5D / 7D</p>
+        </div>
+
+        <div class="live-status">
+            <span></span>
+            LIVE
+        </div>
+    </header>
+
+
+    <!-- COIN SELECTOR -->
+    <section class="toolbar">
+
+        <div class="symbol-selector">
+            <label>ASSET</label>
+
+            <select id="symbol">
+                <option value="BTCUSDT">BTC/USDT</option>
+                <option value="ETHUSDT">ETH/USDT</option>
+                <option value="BNBUSDT">BNB/USDT</option>
+                <option value="SOLUSDT">SOL/USDT</option>
+            </select>
+        </div>
+
+        <div class="last-update">
+            Last update:
+            <strong id="last-update">—</strong>
+        </div>
+
+    </section>
+
+
+    <!-- MAIN FORECAST TABLE -->
+    <section class="forecast-panel">
+
+        <div class="panel-title">
+            <div>
+                <h2>Market Forecast</h2>
+                <p>Current price vs AI estimated price</p>
+            </div>
+        </div>
+
+
+        <div class="forecast-table">
+
+            <!-- HEADER -->
+
+            <div class="forecast-header">
+
+                <div>
+                    CURRENT PRICE
+                </div>
+
+                <div>
+                    3 DAYS
+                </div>
+
+                <div>
+                    5 DAYS
+                </div>
+
+                <div>
+                    7 DAYS
+                </div>
+
+            </div>
+
+
+            <!-- DATA -->
+
+            <div class="forecast-data">
+
+                <!-- CURRENT -->
+
+                <div class="current-price">
+
+                    <span class="asset-name" id="asset-name">
+                        BTC/USDT
+                    </span>
+
+                    <strong id="current-price">
+                        $116,250.00
+                    </strong>
+
+                    <small id="price-change">
+                        —
+                    </small>
+
+                </div>
+
+
+                <!-- 3D -->
+
+                <div class="forecast-cell neutral" id="forecast-3d">
+
+                    <span class="direction">
+                        —
+                    </span>
+
+                    <strong class="target">
+                        —
+                    </strong>
+
+                    <small class="change">
+                        —
+                    </small>
+
+                    <small class="confidence">
+                        Confidence: —
+                    </small>
+
+                </div>
+
+
+                <!-- 5D -->
+
+                <div class="forecast-cell neutral" id="forecast-5d">
+
+                    <span class="direction">
+                        —
+                    </span>
+
+                    <strong class="target">
+                        —
+                    </strong>
+
+                    <small class="change">
+                        —
+                    </small>
+
+                    <small class="confidence">
+                        Confidence: —
+                    </small>
+
+                </div>
+
+
+                <!-- 7D -->
+
+                <div class="forecast-cell neutral" id="forecast-7d">
+
+                    <span class="direction">
+                        —
+                    </span>
+
+                    <strong class="target">
+                        —
+                    </strong>
+
+                    <small class="change">
+                        —
+                    </small>
+
+                    <small class="confidence">
+                        Confidence: —
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AI ANALYSIS -->
+
+    <section class="analysis-panel">
+
+        <div class="panel-title">
+
+            <div>
+                <h2>AI Analysis</h2>
+                <p>Model interpretation</p>
+            </div>
+
+            <div class="analysis-status">
+                WAITING FOR DATA
+            </div>
+
+        </div>
+
+
+        <div class="analysis-content">
+
+            <div class="analysis-summary">
+
+                <span>MARKET BIAS</span>
+
+                <strong id="market-bias">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="analysis-summary">
+
+                <span>RISK</span>
+
+                <strong id="market-risk">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="analysis-summary">
+
+                <span>BEST HORIZON</span>
+
+                <strong id="best-horizon">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="ai-message">
+
+            <span>AI CONCLUSION</span>
+
+            <p id="ai-conclusion">
+                Menunggu data market untuk melakukan analisa.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRICE LEVELS -->
+
+    <section class="levels-panel">
+
+        <div class="level">
+
+            <span>SUPPORT</span>
+
+            <strong id="support">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="level current">
+
+            <span>CURRENT</span>
+
+            <strong id="level-current">
+                $116,250
+            </strong>
+
+        </div>
+
+
+        <div class="level">
+
+            <span>RESISTANCE</span>
+
+            <strong id="resistance">
+                —
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        Crypto Analyzer v0.1.0
+    </footer>
+
+</div>
+
+
+<script
+    src="{{ url_for('static', path='js/app.js') }}">
+</script>
+
+</body>
+</html>
